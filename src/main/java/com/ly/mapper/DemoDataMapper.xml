@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.dao.DemoDataMapper">
+    <insert id="batchInsert" parameterType="com.ly.model.vm.DemoDataVm">
+        insert into demo_data(
+        `str_data`, `double_data`, `date_data`
+        )
+        value
+        <foreach collection="list" item="record" separator=",">
+            ( #{record.strData,jdbcType=VARCHAR}, #{record.doubleData,jdbcType=DOUBLE},
+            #{record.dateData,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+</mapper>
