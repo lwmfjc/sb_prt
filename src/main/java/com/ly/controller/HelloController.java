@@ -37,4 +37,14 @@ public class HelloController {
         demoService.handleFile(file.getInputStream());
         return "success";
     }
+
+    @GetMapping("download")
+    @ResponseBody
+    public String download () throws IOException {
+        System.out.println("开始生成文件");
+        demoService.downloadFile( );
+        return "success";
+    }
+
+
 }

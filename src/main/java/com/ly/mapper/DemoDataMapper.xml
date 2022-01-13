@@ -3,11 +3,11 @@
 <mapper namespace="com.ly.dao.DemoDataMapper">
     <insert id="batchInsert" parameterType="com.ly.model.vm.DemoDataVm">
         insert into demo_data(
-        `str_data`, `double_data`, `date_data`
+        `str_data1`,`str_data2`, `double_data`, `date_data`
         )
         value
         <foreach collection="list" item="record" separator=",">
-            ( #{record.strData,jdbcType=VARCHAR}, #{record.doubleData,jdbcType=DOUBLE},
+            ( #{record.strData1,jdbcType=VARCHAR},  #{record.strData2,jdbcType=VARCHAR}, #{record.doubleData,jdbcType=DOUBLE},
             #{record.dateData,jdbcType=TIMESTAMP}
             )
         </foreach>
