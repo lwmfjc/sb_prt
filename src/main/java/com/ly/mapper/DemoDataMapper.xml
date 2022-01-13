@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ly.dao.DemoDataMapper">
+    <sql id="Base_Column_List">
+        `str_data1`,`str_data2`, `double_data`, `date_data`
+    </sql>
     <insert id="batchInsert" parameterType="com.ly.model.vm.DemoDataVm">
         insert into demo_data(
-        `str_data1`,`str_data2`, `double_data`, `date_data`
+         <include refid="Base_Column_List"></include>
         )
         value
         <foreach collection="list" item="record" separator=",">
-            ( #{record.strData1,jdbcType=VARCHAR},  #{record.strData2,jdbcType=VARCHAR}, #{record.doubleData,jdbcType=DOUBLE},
+            ( #{record.strData1,jdbcType=VARCHAR}, #{record.strData2,jdbcType=VARCHAR},
+            #{record.doubleData,jdbcType=DOUBLE},
             #{record.dateData,jdbcType=TIMESTAMP}
             )
         </foreach>
     </insert>
+
+    <select id="findAll" resultType="com.ly.model.vm.DemoDataVm">
+        select * from demo_data
+    </select>
+
 </mapper>

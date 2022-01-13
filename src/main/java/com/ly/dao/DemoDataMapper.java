@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface DemoDataMapper {
     void batchInsert(List<DemoDataVm> list);
+    List<DemoDataVm> findAll();
 }

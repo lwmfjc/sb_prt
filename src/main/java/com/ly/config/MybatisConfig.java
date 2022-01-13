@@ -31,6 +31,9 @@ public class MybatisConfig {
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sessionFactory.setMapperLocations(resolver.getResources("classpath*:com/ly/mapper/*.xml"));    // 扫描映射文件
+        org.apache.ibatis.session.Configuration configuration=new org.apache.ibatis.session.Configuration();
+        configuration.setMapUnderscoreToCamelCase(true);
+        sessionFactory.setConfiguration(configuration);
 
         return sessionFactory.getObject();
 
