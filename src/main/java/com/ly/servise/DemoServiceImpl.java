@@ -3,22 +3,17 @@ package com.ly.servise;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.util.MapUtils;
-import com.alibaba.excel.write.builder.ExcelWriterBuilder;
-import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.ly.dao.DemoDataMapper;
 import com.ly.model.vm.DemoDataVm;
 import com.ly.listener.DemoDataListener;
-import com.ly.utils.DataCreateUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +34,7 @@ public class DemoServiceImpl implements DemoService{
     @Override
     public void handleFile(InputStream inputStream) {
        EasyExcel.read(inputStream, DemoDataVm.class, new DemoDataListener(this)).sheet()
-               //.headRowNumber(3)
+               .headRowNumber(3)
                .doRead();
     }
 

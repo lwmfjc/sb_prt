@@ -2,6 +2,7 @@ package com.ly.dao;
 
 import com.ly.model.vm.DemoDataVm;
 import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

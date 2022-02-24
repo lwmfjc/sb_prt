@@ -1,6 +1,8 @@
 package com.ly.listener;
 
 import com.alibaba.excel.context.AnalysisContext;
+import com.alibaba.excel.event.AnalysisEventListener;
+import com.alibaba.excel.metadata.data.ReadCellData;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.util.ListUtils;
 import com.ly.model.vm.DemoDataVm;
@@ -9,15 +11,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Map;
 
-
-public class DemoDataListener implements ReadListener<DemoDataVm> {
+public class DemoDataListener extends AnalysisEventListener<DemoDataVm> {
     private Logger log = LoggerFactory.getLogger(DemoDataListener.class);
 
     /**
      * 每隔5条存储数据库，实际使用中可以100条，然后清理list ，方便内存回收
      */
-    private static final int BATCH_COUNT = 5;
+    private static final int BATCH_COUNT = 2;
     /**
      * 缓存的数据
      */
@@ -59,6 +61,17 @@ public class DemoDataListener implements ReadListener<DemoDataVm> {
         }
     }
 
+
+    public void invokeHead(Map<Integer, ReadCellData<?>> headMap, AnalysisContext context) {
+        //super.invokeHead(headMap,context);
+        System.out.printf("解析到的表头之前的数据 %s\n",headMap);
+    }
+
+    @Override
+    public void invokeHeadMap(Map headMap, AnalysisContext context) {
+        System.out.printf("解析到的表头数据%s",headMap);
+        //LOGGER.info("解析到的表头数据: {}", headMap);
+    }
     /**
      * 所有数据解析完成了 都会来调用
      *
