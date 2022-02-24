@@ -10,5 +10,6 @@ public interface DemoService {
     int batchInsert(List<DemoDataVm> demoDataVms);
     void handleFile(InputStream inputStream);
     void downloadFile(HttpServletResponse response) throws IOException;
+    void handleFileOfMine(InputStream inputStream);
     List<DemoDataVm> findAll();
 }

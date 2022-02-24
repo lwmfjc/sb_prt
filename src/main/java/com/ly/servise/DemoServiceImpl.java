@@ -2,11 +2,14 @@ package com.ly.servise;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.context.AnalysisContext;
+import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.util.MapUtils;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.ly.dao.DemoDataMapper;
 import com.ly.model.vm.DemoDataVm;
 import com.ly.listener.DemoDataListener;
+import com.ly.model.vm.MaterialReportVm;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +78,26 @@ public class DemoServiceImpl implements DemoService{
             excelWriter.finish();
         }
     }
+
+    @Override
+    public void handleFileOfMine(InputStream inputStream) {
+
+        EasyExcel.read(inputStream, MaterialReportVm.class, new AnalysisEventListener<MaterialReportVm>(){
+            @Override
+            public void invoke(MaterialReportVm materialReportVm, AnalysisContext analysisContext) {
+                System.out.println("解析到一条数据");
+                System.out.println(materialReportVm);
+            }
+
+            @Override
+            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
+
+            }
+        }).sheet()
+                .headRowNumber(7)
+                .doRead();
+    }
+
 
     @Override
     public List<DemoDataVm> findAll() {
