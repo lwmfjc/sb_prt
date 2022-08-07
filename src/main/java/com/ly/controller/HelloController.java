@@ -1,6 +1,7 @@
 package com.ly.controller;
 
 import com.alibaba.excel.util.MapUtils;
+import com.ly.entity.User;
 import com.ly.model.vm.DemoDataVm;
 import com.ly.listener.DemoDataListener;
 import com.ly.servise.DemoService;
@@ -29,6 +30,17 @@ public class HelloController {
     @Autowired
     private DemoService demoService;
 
+    @PostMapping("helloUser")
+    @ResponseBody
+    public User helloUser(@RequestBody User user) {
+        System.out.println(user);
+        return user;
+    }
+    @PostMapping("helloParams")
+    public String helloParams(@RequestParam("name")String name) {
+        System.out.println(name);
+        return name;
+    }
     @GetMapping("hello")
     public String hello() {
         log.info(iSay.sayWord());
