@@ -33,6 +33,14 @@ public class HelloController {
     @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
+    @Autowired
+    private MyWebSocket myWebSocket;
+    @GetMapping("/socket/publish")
+    public void publish(String userId,String message) {
+        System.out.println("abc");
+        myWebSocket.sendOneMessage(userId,message);
+    }
+
     @PostMapping("helloUser")
     @ResponseBody
     public User helloUser(@RequestBody User user) {
